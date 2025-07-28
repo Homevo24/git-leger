@@ -7,17 +7,65 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Burger & sidebar
+        const burger = document.getElementById('burger-menu');
+        const sidebar = document.getElementById('sidebar-menu');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        function openSidebar() {
+            sidebar.classList.add('open');
+            document.body.classList.add('sidebar-open');
+        }
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            document.body.classList.remove('sidebar-open');
+        }
+        if (burger && sidebar) {
+            burger.addEventListener('click', openSidebar);
+        }
+        // Close sidebar on click outside or on link
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', closeSidebar);
+        });
+        sidebar.addEventListener('click', function(e) {
+            if (e.target === sidebar) closeSidebar();
+        });
+        // ESC key closes sidebar
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeSidebar();
+        });
+    });
+</script>
 <body>
+    <!-- Header bar with logo and burger always visible -->
+    <div class="header-bar">
+        <div class="header-logo">GNH</div>
+        <button class="burger" id="burger-menu" aria-label="Ouvrir le menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+    <!-- Sidebar menu -->
+    <aside class="sidebar-menu" id="sidebar-menu">
+        <nav class="sidebar-links">
+            <a href="index.html" class="sidebar-link active">HOME</a>
+            <a href="about.html" class="sidebar-link">ABOUT</a>
+            <a href="resume.html" class="sidebar-link">RESUME</a>
+            <a href="portfolio.html" class="sidebar-link">PORTFOLIO</a>
+        </nav>
+    </aside>
+    <!-- Header/navbar for desktop -->
     <header class="navbar">
         <nav>
-            <ul>
-                <li class="nav-link active" data-page="home">Home</li>
-                <li class="nav-link" data-page="about"><a href="about.html">About</a></li>
-                <li class="nav-link" data-page="resume"> <a href="resume.html">Resume </a></li>
-                <li class="nav-link" data-page="portfolio">Portfolio</li>
+            <ul id="nav-links">
+                <li><a class="nav-link active" href="index.html">Home</a></li>
+                <li><a class="nav-link" href="about.html">About</a></li>
+                <li><a class="nav-link" href="resume.html">Resume</a></li>
+                <li><a class="nav-link" href="portfolio.html">Portfolio</a></li>
             </ul>
         </nav>
-      
     </header>
     <main id="main-content">
         <!-- Home Page Content -->
